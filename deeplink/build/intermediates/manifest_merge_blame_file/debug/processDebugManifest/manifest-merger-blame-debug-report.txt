@@ -1,0 +1,70 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="android.ai.deeplink" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+5-->INJECTED
+5-->INJECTED
+6
+7    <application>
+7-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:4:5-47:19
+8
+9        <!--
+10            DeepLinkActivity handles custom URI scheme deep links (myapp://deeplink/...)
+11
+12            Key Interview Points in Manifest Configuration:
+13            1. android:exported="true":
+14               Mandatory for Android 12 (API 31+) if an intent filter is defined.
+15               Without this, the app will fail to install or compile!
+16
+17            2. android:launchMode="singleTask":
+18               Ensures a new instance is NOT created if already running; instead
+19               onNewIntent(Intent) is invoked.
+20
+21            3. android.intent.action.VIEW:
+22               Required for deep links - denotes viewing data pointed to by URI.
+23
+24            4. android.intent.category.DEFAULT:
+25               Required to resolve implicit intents (like startActivity(intent)).
+26
+27            5. android.intent.category.BROWSABLE:
+28               Required to allow web browsers (Chrome, Safari, etc.) or web links
+29               to trigger the app.
+30        -->
+31        <activity
+31-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:27:9-46:20
+32            android:name="android.ai.deeplink.DeepLinkActivity"
+32-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:28:13-45
+33            android:exported="true"
+33-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:29:13-36
+34            android:label="Deep Link Demo"
+34-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:30:13-43
+35            android:launchMode="singleTask" >
+35-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:31:13-44
+36
+37            <!-- Deep Link Intent Filter for custom scheme: myapp://deeplink/* -->
+38            <intent-filter>
+38-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:34:13-44:29
+39                <action android:name="android.intent.action.VIEW" />
+39-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:35:17-69
+39-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:35:25-66
+40
+41                <category android:name="android.intent.category.DEFAULT" />
+41-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:37:17-76
+41-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:37:27-73
+42                <category android:name="android.intent.category.BROWSABLE" />
+42-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:38:17-78
+42-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:38:27-75
+43
+44                <!-- Matches: myapp://deeplink/product/*, myapp://deeplink/profile/*, etc. -->
+45                <data
+45-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:41:17-43:47
+46                    android:host="deeplink"
+46-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:43:21-44
+47                    android:scheme="myapp" />
+47-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\AndroidManifest.xml:42:21-43
+48            </intent-filter>
+49        </activity>
+50    </application>
+51
+52</manifest>

@@ -1,0 +1,9 @@
+android.ai.applink-pngs-0 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\build\generated\res\pngs\debug
+android.ai.applink-updated_navigation_xml-1 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\build\generated\updated_navigation_xml\debug
+android.ai.applink-mergeDebugResources-2 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+android.ai.applink-mergeDebugResources-3 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+android.ai.applink-debug-4 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\build\intermediates\merged_res\debug\mergeDebugResources
+android.ai.applink-debug-5 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\build\intermediates\packaged_res\debug\packageDebugResources
+android.ai.applink-debug-6 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\debug\res
+android.ai.applink-main-7 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\res
+gradleHome-0 C:\Users\Varsha\.gradle

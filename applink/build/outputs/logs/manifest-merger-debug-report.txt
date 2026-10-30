@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:1-6:12
+INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:1-6:12
+	package
+		INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:11-69
+uses-sdk
+INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml

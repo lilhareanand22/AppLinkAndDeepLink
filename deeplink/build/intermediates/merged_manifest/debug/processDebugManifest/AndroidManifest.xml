@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="android.ai.deeplink" >
+
+    <uses-sdk android:minSdkVersion="24" />
+
+    <application>
+
+        <!--
+            DeepLinkActivity handles custom URI scheme deep links (myapp://deeplink/...)
+
+            Key Interview Points in Manifest Configuration:
+            1. android:exported="true":
+               Mandatory for Android 12 (API 31+) if an intent filter is defined.
+               Without this, the app will fail to install or compile!
+
+            2. android:launchMode="singleTask":
+               Ensures a new instance is NOT created if already running; instead
+               onNewIntent(Intent) is invoked.
+
+            3. android.intent.action.VIEW:
+               Required for deep links - denotes viewing data pointed to by URI.
+
+            4. android.intent.category.DEFAULT:
+               Required to resolve implicit intents (like startActivity(intent)).
+
+            5. android.intent.category.BROWSABLE:
+               Required to allow web browsers (Chrome, Safari, etc.) or web links
+               to trigger the app.
+        -->
+        <activity
+            android:name="android.ai.deeplink.DeepLinkActivity"
+            android:exported="true"
+            android:label="Deep Link Demo"
+            android:launchMode="singleTask" >
+
+            <!-- Deep Link Intent Filter for custom scheme: myapp://deeplink/* -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Matches: myapp://deeplink/product/*, myapp://deeplink/profile/*, etc. -->
+                <data
+                    android:host="deeplink"
+                    android:scheme="myapp" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
