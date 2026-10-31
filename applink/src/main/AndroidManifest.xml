@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- App Link intent filters will be added in Phase 3 -->
+    <application>
+        <!--
+            AppLinkActivity handles verified Android App Links (https://www.example.com/...)
+
+            Key Interview Concepts for Android App Links:
+            1. android:autoVerify="true":
+               Signals the Android system to initiate domain verification at install time
+               (API 23+) or via Intent Filter Verification. Android checks the digital asset
+               links file hosted at https://<domain>/.well-known/assetlinks.json.
+               If verified, the OS opens this app directly WITHOUT presenting the "Open with"
+               disambiguation dialog.
+
+            2. android:exported="true":
+               Mandatory since Android 12 (API 31) for activities with intent filters.
+
+            3. android:launchMode="singleTask":
+               Ensures only a single instance of AppLinkActivity runs; subsequent links
+               invoke onNewIntent(intent: Intent) rather than re-creating the Activity.
+
+            4. Schemes and Hosts:
+               App Links MUST use HTTP and HTTPS schemes with valid domain hosts.
+               Custom schemes (e.g., myapp://) CANNOT be App Links.
+
+            5. Fallback Behavior:
+               If the app is not installed or verification fails, clicking the link in a browser
+               simply opens the webpage on the browser seamlessly.
+        -->
+        <activity
+            android:name=".AppLinkActivity"
+            android:exported="true"
+            android:label="App Link Demo"
+            android:launchMode="singleTask">
+
+            <!-- App Link Intent Filter: https://www.example.com -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- HTTP and HTTPS schemes -->
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+
+                <!-- Target Hosts -->
+                <data android:host="www.example.com" />
+                <data android:host="example.com" />
+
+                <!-- Supported Paths -->
+                <data android:pathPrefix="/details" />
+                <data android:pathPrefix="/user" />
+                <data android:pathPrefix="/order" />
+                <data android:pathPrefix="/guide" />
+                <data android:pathPrefix="/inspector" />
+            </intent-filter>
+
+        </activity>
+    </application>
 
 </manifest>

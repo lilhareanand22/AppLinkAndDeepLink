@@ -1,11 +1,47 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:1-6:12
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:1-63:12
 	package
 		INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:4:5-61:19
+activity#android.ai.applink.AppLinkActivity
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:31:9-60:20
+	android:label
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:34:13-42
+	android:launchMode
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:35:13-44
+	android:exported
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:33:13-36
+	android:name
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:32:13-44
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:example.com+data:host:www.example.com+data:pathPrefix:/details+data:pathPrefix:/guide+data:pathPrefix:/inspector+data:pathPrefix:/order+data:pathPrefix:/user+data:scheme:http+data:scheme:https
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:38:13-58:29
+	android:autoVerify
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:38:28-53
+action#android.intent.action.VIEW
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:39:17-69
+	android:name
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:39:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:41:17-76
+	android:name
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:41:27-73
+category#android.intent.category.BROWSABLE
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:42:17-78
+	android:name
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:42:27-75
+data
+ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+	android:host
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:49:23-53
+	android:scheme
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:23-45
+	android:pathPrefix
+		ADDED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:53:23-52
 uses-sdk
 INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml

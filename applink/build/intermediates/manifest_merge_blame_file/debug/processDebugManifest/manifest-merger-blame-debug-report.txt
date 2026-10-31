@@ -1,8 +1,100 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="android.ai.applink" > <!-- App Link intent filters will be added in Phase 3 -->
-4    <uses-sdk android:minSdkVersion="24" />
-4-->INJECTED
-4-->INJECTED
-5
-6</manifest>
+3    package="android.ai.applink" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+5-->INJECTED
+5-->INJECTED
+6
+7    <application>
+7-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:4:5-61:19
+8
+9        <!--
+10            AppLinkActivity handles verified Android App Links (https://www.example.com/...)
+11
+12            Key Interview Concepts for Android App Links:
+13            1. android:autoVerify="true":
+14               Signals the Android system to initiate domain verification at install time
+15               (API 23+) or via Intent Filter Verification. Android checks the digital asset
+16               links file hosted at https://<domain>/.well-known/assetlinks.json.
+17               If verified, the OS opens this app directly WITHOUT presenting the "Open with"
+18               disambiguation dialog.
+19
+20            2. android:exported="true":
+21               Mandatory since Android 12 (API 31) for activities with intent filters.
+22
+23            3. android:launchMode="singleTask":
+24               Ensures only a single instance of AppLinkActivity runs; subsequent links
+25               invoke onNewIntent(intent: Intent) rather than re-creating the Activity.
+26
+27            4. Schemes and Hosts:
+28               App Links MUST use HTTP and HTTPS schemes with valid domain hosts.
+29               Custom schemes (e.g., myapp://) CANNOT be App Links.
+30
+31            5. Fallback Behavior:
+32               If the app is not installed or verification fails, clicking the link in a browser
+33               simply opens the webpage on the browser seamlessly.
+34        -->
+35        <activity
+35-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:31:9-60:20
+36            android:name="android.ai.applink.AppLinkActivity"
+36-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:32:13-44
+37            android:exported="true"
+37-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:33:13-36
+38            android:label="App Link Demo"
+38-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:34:13-42
+39            android:launchMode="singleTask" >
+39-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:35:13-44
+40
+41            <!-- App Link Intent Filter: https://www.example.com -->
+42            <intent-filter android:autoVerify="true" >
+42-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:38:13-58:29
+42-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:38:28-53
+43                <action android:name="android.intent.action.VIEW" />
+43-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:39:17-69
+43-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:39:25-66
+44
+45                <category android:name="android.intent.category.DEFAULT" />
+45-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:41:17-76
+45-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:41:27-73
+46                <category android:name="android.intent.category.BROWSABLE" />
+46-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:42:17-78
+46-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:42:27-75
+47
+48                <!-- HTTP and HTTPS schemes -->
+49                <data android:scheme="https" />
+49-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+49-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:23-45
+50                <data android:scheme="http" />
+50-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+50-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:23-45
+51
+52                <!-- Target Hosts -->
+53                <data android:host="www.example.com" />
+53-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+53-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:49:23-53
+54                <data android:host="example.com" />
+54-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+54-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:49:23-53
+55
+56                <!-- Supported Paths -->
+57                <data android:pathPrefix="/details" />
+57-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+57-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:53:23-52
+58                <data android:pathPrefix="/user" />
+58-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+58-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:53:23-52
+59                <data android:pathPrefix="/order" />
+59-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+59-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:53:23-52
+60                <data android:pathPrefix="/guide" />
+60-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+60-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:53:23-52
+61                <data android:pathPrefix="/inspector" />
+61-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:45:17-48
+61-->C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\applink\src\main\AndroidManifest.xml:53:23-52
+62            </intent-filter>
+63        </activity>
+64    </application>
+65
+66</manifest>
