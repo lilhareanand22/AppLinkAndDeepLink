@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".AppLinkAndDeepLinkApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,6 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppLinkAndDeepLink">
+
+        <!--
+            Phase 4: Launcher & Navigation Hub
+            MainActivity is the main LAUNCHER entry point into the application.
+            It provides access to:
+            1. Multi-module navigation hub
+            2. Phase 2 Deep Links (:deeplink)
+            3. Phase 3 App Links (:applink)
+            4. Live Intent Playground & Resolver
+            5. Architecture & Interview Knowledge Hub
+        -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -19,10 +31,10 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
