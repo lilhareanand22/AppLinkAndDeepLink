@@ -214,7 +214,8 @@ private fun DashboardHomeContent(
 
                 OutlinedButton(
                     onClick = {
-                        val result = AppRouter.launchImplicitUri(context, "https://www.example.com/details/456?discount=20&ref=dashboard")
+                        val uri = "https://www.example.com/details/456?discount=20&ref=dashboard"
+                        val result = AppRouter.launchImplicitUri(context, uri)
                         handleLaunchResult(context, result)
                     },
                     modifier = Modifier.fillMaxWidth()

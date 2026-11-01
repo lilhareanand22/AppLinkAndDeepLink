@@ -1,0 +1,74 @@
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+
+complexity:
+  active: true
+  CyclomaticComplexMethod:
+    active: true
+    threshold: 30
+    ignoreAnnotated: ["Composable"]
+  LongMethod:
+    active: true
+    threshold: 300
+    ignoreAnnotated: ["Composable"]
+  LongParameterList:
+    active: true
+    functionThreshold: 15
+    constructorThreshold: 15
+    ignoreAnnotated: ["Composable"]
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 40
+    thresholdInClasses: 35
+    thresholdInInterfaces: 35
+    thresholdInObjects: 35
+    thresholdInEnums: 35
+    ignoreAnnotatedFunctions: ["Composable"]
+  LargeClass:
+    active: true
+    threshold: 500
+
+style:
+  active: true
+  MaxLineLength:
+    active: false
+  NewLineAtEndOfFile:
+    active: false
+  WildcardImport:
+    active: false
+  MagicNumber:
+    active: false
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: ["Composable", "Preview"]
+  UnusedParameter:
+    active: false
+  UnusedImports:
+    active: false
+
+naming:
+  active: true
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: ["Composable"]
+
+exceptions:
+  active: true
+  TooGenericExceptionCaught:
+    active: false
+  SwallowedException:
+    active: false
+
+performance:
+  active: true
+  SpreadOperator:
+    active: true
+
+potential-bugs:
+  active: true
+  UnsafeCast:
+    active: true
+
+empty-blocks:
+  active: true

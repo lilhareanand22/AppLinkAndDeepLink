@@ -67,9 +67,11 @@ object AppRouter {
         val targetActivity = resolveInfo?.activityInfo?.name
         val isInternal = targetPkg == context.packageName
 
+        val isVerifiedAppLink = uri.scheme in listOf("http", "https") &&
+            (uri.host in listOf("www.example.com", "example.com"))
         val linkType = when {
             uri.scheme == "myapp" -> "Phase 2 Custom Scheme Deep Link"
-            uri.scheme in listOf("http", "https") && (uri.host in listOf("www.example.com", "example.com")) -> "Phase 3 Verified Android App Link"
+            isVerifiedAppLink -> "Phase 3 Verified Android App Link"
             uri.scheme in listOf("http", "https") -> "Standard External Web Link"
             else -> "Other Custom Protocol (${uri.scheme}://)"
         }

@@ -1,0 +1,29 @@
+<variant
+    name="debug"
+    package="android.ai.applink"
+    minSdkVersion="24"
+    targetSdkVersion="37.0"
+    debuggable="true"
+    mergedManifest="build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml"
+    partialResultsDir="build\intermediates\android_test_lint_partial_results\debug\lintAnalyzeDebugAndroidTest\out"
+    desugaredMethodsFiles="C:\Users\Varsha\.gradle\caches\9.6.0\transforms\4d92545f3529e58c40f4fd8dee163251\transformed\D8BackportedDesugaredMethods.txt">
+  <buildFeatures/>
+  <sourceProviders>
+  </sourceProviders>
+  <testSourceProviders>
+    <sourceProvider
+        manifests="src\androidTest\AndroidManifest.xml"
+        javaDirectories="src\androidTest\java;src\androidTestDebug\java;src\androidTest\kotlin;src\androidTestDebug\kotlin"
+        resDirectories="src\androidTest\res;src\androidTestDebug\res"
+        assetsDirectories="src\androidTest\assets;src\androidTestDebug\assets"
+        keepRulesDirectories="src\androidTest\keepRules;src\androidTestDebug\keepRules"
+        androidTest="true"/>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <artifact
+      type="INSTRUMENTATION_TEST"
+      applicationId="android.ai.applink.test"
+      desugaredMethodsFiles="C:\Users\Varsha\.gradle\caches\9.6.0\transforms\4d92545f3529e58c40f4fd8dee163251\transformed\D8BackportedDesugaredMethods.txt">
+  </artifact>
+</variant>
