@@ -35,6 +35,7 @@ env:
   JAVA_DISTRIBUTION: 'temurin'
   JAVA_VERSION: '21'
   GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.jvmargs="-Xmx4g -Dfile.encoding=UTF-8"'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   # ============================================================================
@@ -45,16 +46,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -69,7 +70,7 @@ jobs:
         run: ./gradlew :app:assembleDebug
 
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -84,16 +85,16 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -109,7 +110,7 @@ jobs:
 
       - name: Publish JUnit Test Results
         if: always()
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v3
         with:
           name: 'Unit & Robolectric Test Results'
           path: 'app/build/test-results/testDebugUnitTest/*.xml'
@@ -118,7 +119,7 @@ jobs:
 
       - name: Upload JUnit XML Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: test-results-xml
           path: app/build/test-results/testDebugUnitTest/
@@ -126,7 +127,7 @@ jobs:
 
       - name: Upload Test HTML Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: test-report-html
           path: app/build/reports/tests/testDebugUnitTest/
@@ -134,7 +135,7 @@ jobs:
 
       - name: Upload JaCoCo Coverage Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: jacoco-coverage-report
           path: app/build/reports/jacoco/jacocoTestReport/html/
@@ -149,16 +150,16 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -181,16 +182,16 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -206,7 +207,7 @@ jobs:
 
       - name: Upload Detekt Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: detekt-report
           path: app/build/reports/detekt/detekt.html
@@ -221,16 +222,16 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -246,7 +247,7 @@ jobs:
 
       - name: Upload Android Lint Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: lint-report
           path: app/build/reports/lint-results-debug.html
@@ -261,16 +262,16 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
@@ -279,7 +280,7 @@ jobs:
           restore-keys: gradle-${{ runner.os }}-
 
       - name: Cache OWASP NVD Database
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.gradle/dependency-check-data
           key: owasp-nvd-${{ runner.os }}-${{ github.run_id }}
@@ -293,7 +294,7 @@ jobs:
 
       - name: Upload OWASP Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: owasp-dependency-check-report
           path: app/build/reports/dependency-check-report.html
