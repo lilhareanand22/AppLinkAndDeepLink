@@ -6,4 +6,4 @@ android.ai.deeplink-debug-4 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose
 android.ai.deeplink-debug-5 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\build\intermediates\packaged_res\debug\packageDebugResources
 android.ai.deeplink-debug-6 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\debug\res
 android.ai.deeplink-main-7 C:\Users\Varsha\Documents\WorkSpcace\Jetpack_Compose_Trainng_Sources_Code\AppLinkAndDeepLink\deeplink\src\main\res
-gradleHome-0 C:\Users\Varsha\.gradle
+gradleHome-0 C:\Users\Varsha\Documents\WorkSpcace\Google_Jetpack_Training\PractiesExample\.gradle
