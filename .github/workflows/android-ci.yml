@@ -1,14 +1,18 @@
 # ==============================================================================
 # GitHub Actions CI Workflow for AppLinkAndDeepLink
-# Triggers on Pull Requests targeting the 'master' branch
+# Fail-Fast Tiered PR Verification
 #
-# Stages:
-#   Stage 2: Build & Compilation    → :app:assembleDebug
-#   Stage 3: Testing & Coverage     → :app:testDebugUnitTest + :app:jacocoTestReport
-#   Stage 4: Code Formatting        → :app:ktlintCheck
-#   Stage 5: Static Analysis        → :app:detekt
-#   Stage 6: Platform Quality       → :app:lintDebug
-#   Stage 7: Software Composition   → :app:dependencyCheckAnalyze
+# Pipeline Structure:
+#   Tier 1 (Fast Static Gates, ~15–30s):
+#     - Stage 1: Code Formatting       → :app:ktlintCheck
+#     - Stage 2: Static Analysis       → :app:detekt
+#   Tier 2 (Testing & Quality, ~1–2m):
+#     - Stage 3: Testing & Coverage    → :app:testDebugUnitTest + :app:jacocoTestReport
+#     - Stage 4: Platform Quality      → :app:lintDebug
+#   Tier 3 (Compilation & Packaging, ~2m):
+#     - Stage 5: Build & Compilation   → :app:assembleDebug
+#   Tier 4 (Final PR Merge Gate):
+#     - Verification Summary
 # ==============================================================================
 
 name: Android CI - Pull Request Verification
@@ -39,10 +43,10 @@ env:
 
 jobs:
   # ============================================================================
-  # Stage 2: Build & Compilation
+  # TIER 1: Fast Static Gates (Fail Fast in <30s)
   # ============================================================================
-  build:
-    name: 'Stage 2: Build & Compilation'
+  code-style:
+    name: 'Stage 1: Code Formatting (ktlint)'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -63,123 +67,15 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
           restore-keys: gradle-${{ runner.os }}-
 
-      - name: Grant Execute Permission for Gradle Wrapper
-        run: chmod +x ./gradlew
-
-      - name: Compile Debug APK
-        run: ./gradlew :app:assembleDebug
-
-      - name: Upload Debug APK
-        uses: actions/upload-artifact@v5
-        with:
-          name: debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 14
-
-  # ============================================================================
-  # Stage 3: Testing & Coverage
-  # ============================================================================
-  test:
-    name: 'Stage 3: Testing & Coverage'
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v5
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-
-      - name: Cache Gradle Packages
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
-          restore-keys: gradle-${{ runner.os }}-
-
-      - name: Grant Execute Permission for Gradle Wrapper
-        run: chmod +x ./gradlew
-
-      - name: Run Unit, Robolectric & Konsist Tests with JaCoCo Coverage
-        run: ./gradlew :app:testDebugUnitTest :app:jacocoTestReport
-
-      - name: Publish JUnit Test Results
-        if: always()
-        uses: dorny/test-reporter@v3
-        with:
-          name: 'Unit & Robolectric Test Results'
-          path: 'app/build/test-results/testDebugUnitTest/*.xml'
-          reporter: java-junit
-          fail-on-error: false
-
-      - name: Upload JUnit XML Results
-        if: always()
-        uses: actions/upload-artifact@v5
-        with:
-          name: test-results-xml
-          path: app/build/test-results/testDebugUnitTest/
-          retention-days: 14
-
-      - name: Upload Test HTML Report
-        if: always()
-        uses: actions/upload-artifact@v5
-        with:
-          name: test-report-html
-          path: app/build/reports/tests/testDebugUnitTest/
-          retention-days: 14
-
-      - name: Upload JaCoCo Coverage Report
-        if: always()
-        uses: actions/upload-artifact@v5
-        with:
-          name: jacoco-coverage-report
-          path: app/build/reports/jacoco/jacocoTestReport/html/
-          retention-days: 14
-
-  # ============================================================================
-  # Stage 4: Code Formatting (ktlint)
-  # ============================================================================
-  ktlint:
-    name: 'Stage 4: Code Formatting (ktlint)'
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v5
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-
-      - name: Cache Gradle Packages
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
-          restore-keys: gradle-${{ runner.os }}-
-
-      - name: Grant Execute Permission for Gradle Wrapper
+      - name: Grant Execute Permission
         run: chmod +x ./gradlew
 
       - name: Run ktlintCheck
         run: ./gradlew :app:ktlintCheck
 
-  # ============================================================================
-  # Stage 5: Static Analysis (Detekt)
-  # ============================================================================
-  detekt:
-    name: 'Stage 5: Static Analysis (Detekt)'
+  static-analysis:
+    name: 'Stage 2: Static Analysis (Detekt)'
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -199,7 +95,7 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
           restore-keys: gradle-${{ runner.os }}-
 
-      - name: Grant Execute Permission for Gradle Wrapper
+      - name: Grant Execute Permission
         run: chmod +x ./gradlew
 
       - name: Run Detekt Static Analysis
@@ -214,12 +110,12 @@ jobs:
           retention-days: 14
 
   # ============================================================================
-  # Stage 6: Platform Quality (Android Lint)
+  # TIER 2: Testing & Platform Quality (Runs after Tier 1 passes)
   # ============================================================================
-  lint:
-    name: 'Stage 6: Platform Quality (Android Lint)'
+  unit-tests:
+    name: 'Stage 3: Testing & Coverage'
     runs-on: ubuntu-latest
-    needs: build
+    needs: [code-style, static-analysis]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -239,7 +135,53 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
           restore-keys: gradle-${{ runner.os }}-
 
-      - name: Grant Execute Permission for Gradle Wrapper
+      - name: Grant Execute Permission
+        run: chmod +x ./gradlew
+
+      - name: Run Unit, Robolectric & Konsist Tests with JaCoCo Coverage
+        run: ./gradlew :app:testDebugUnitTest :app:jacocoTestReport
+
+      - name: Publish JUnit Test Results
+        if: always()
+        uses: dorny/test-reporter@v3
+        with:
+          name: 'Unit & Robolectric Test Results'
+          path: 'app/build/test-results/testDebugUnitTest/*.xml'
+          reporter: java-junit
+          fail-on-error: false
+
+      - name: Upload JaCoCo Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: jacoco-coverage-report
+          path: app/build/reports/jacoco/jacocoTestReport/html/
+          retention-days: 14
+
+  platform-lint:
+    name: 'Stage 4: Platform Quality (Android Lint)'
+    runs-on: ubuntu-latest
+    needs: [code-style, static-analysis]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Cache Gradle Packages
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
+          restore-keys: gradle-${{ runner.os }}-
+
+      - name: Grant Execute Permission
         run: chmod +x ./gradlew
 
       - name: Run Android Lint (lintDebug)
@@ -253,15 +195,53 @@ jobs:
           path: app/build/reports/lint-results-debug.html
           retention-days: 14
 
+  # ============================================================================
+  # TIER 3: Compilation & Packaging (Runs after Tier 2 passes)
+  # ============================================================================
+  build-apk:
+    name: 'Stage 5: Build & Compilation'
+    runs-on: ubuntu-latest
+    needs: [unit-tests, platform-lint]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Cache Gradle Packages
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties', '**/libs.versions.toml') }}
+          restore-keys: gradle-${{ runner.os }}-
+
+      - name: Grant Execute Permission
+        run: chmod +x ./gradlew
+
+      - name: Compile Debug APK
+        run: ./gradlew :app:assembleDebug
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v5
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
 
   # ============================================================================
-  # Final Status Gate: Summary of All Quality Checks
+  # TIER 4: Final Status Gate (Summary of All Quality Checks)
   # ============================================================================
   verification-summary:
     name: 'Verification Summary'
     runs-on: ubuntu-latest
     if: always()
-    needs: [build, test, ktlint, detekt, lint, dependency-check]
+    needs: [code-style, static-analysis, unit-tests, platform-lint, build-apk]
     steps:
       - name: Summarize Verification Results
         run: |
@@ -269,33 +249,24 @@ jobs:
           echo "     PULL REQUEST VERIFICATION SUMMARY"
           echo "================================================================"
           echo ""
-          echo "Stage 2 - Build & Compilation     : ${{ needs.build.result }}"
-          echo "Stage 3 - Testing & Coverage       : ${{ needs.test.result }}"
-          echo "Stage 4 - Code Formatting (ktlint) : ${{ needs.ktlint.result }}"
-          echo "Stage 5 - Static Analysis (Detekt) : ${{ needs.detekt.result }}"
-          echo "Stage 6 - Platform Quality (Lint)  : ${{ needs.lint.result }}"
-          echo "Stage 7 - Software Composition     : ${{ needs.dependency-check.result }}"
+          echo "Stage 1 - Code Formatting (ktlint) : ${{ needs.code-style.result }}"
+          echo "Stage 2 - Static Analysis (Detekt) : ${{ needs.static-analysis.result }}"
+          echo "Stage 3 - Testing & Coverage       : ${{ needs.unit-tests.result }}"
+          echo "Stage 4 - Platform Quality (Lint)  : ${{ needs.platform-lint.result }}"
+          echo "Stage 5 - Build & Compilation      : ${{ needs.build-apk.result }}"
           echo ""
           echo "================================================================"
 
-      - name: Fail If Any Quality Gate Failed
+      - name: Fail If Any Stage Failed
         if: |
-          needs.build.result == 'failure' ||
-          needs.test.result == 'failure' ||
-          needs.ktlint.result == 'failure' ||
-          needs.detekt.result == 'failure' ||
-          needs.lint.result == 'failure' ||
-          needs.dependency-check.result == 'failure'
+          needs.code-style.result != 'success' ||
+          needs.static-analysis.result != 'success' ||
+          needs.unit-tests.result != 'success' ||
+          needs.platform-lint.result != 'success' ||
+          needs.build-apk.result != 'success'
         run: |
           echo "❌ One or more verification stages failed. Pull request cannot be merged."
           exit 1
 
       - name: All Quality Gates Passed
-        if: |
-          needs.build.result == 'success' &&
-          needs.test.result == 'success' &&
-          needs.ktlint.result == 'success' &&
-          needs.detekt.result == 'success' &&
-          needs.lint.result == 'success' &&
-          needs.dependency-check.result == 'success'
-        run: echo "✔ All 6 verification stages passed. Pull request is safe to merge."
+        run: echo "✔ All 5 verification stages passed. Pull request is safe to merge."
